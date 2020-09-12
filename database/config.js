@@ -1,8 +1,8 @@
 module.exports = {
-    HOST: "sql12.freesqldatabase.com",
-    USER: "sql12365188",
-    PASSWORD: "5iSkh3RGx8",
-    DB: "sql12365188",
+    HOST: process.env.HOST,
+    USER: process.env.USER,
+    PASSWORD: process.env.PASSWORD,
+    DB: process.env.DB,
     dialect:"mysql",
     pool: {// It is optional and is deployed in the Sequelize connection pool config.
         max: 5,// maximum number of connections permissible in a pool
