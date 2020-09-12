@@ -8,7 +8,7 @@
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "client": "cd client && npn start",
     "dev": "concurrently -n 'server,client' -c 'red/green' \"node server.js\" \"cd client && npm start\""
   },
@@ -20,12 +20,17 @@
   "author": "Samridh Harshit",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
     "express": "^4.17.1",
-    "mongodb": "^3.6.2",
-    "mongoose": "^5.10.5",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
     "nodemon": "^2.0.4",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "sequelize": "^6.3.5",
+    "uninstall": "0.0.0"
   }
 }
