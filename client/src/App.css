@@ -70,3 +70,12 @@ body, html {
   color: #0056b3;
   text-decoration: none;
 }
+
+.logo{
+  display: inline-block;
+}
+
+.log-out{
+  display: inline-block;
+  float: right;
+}

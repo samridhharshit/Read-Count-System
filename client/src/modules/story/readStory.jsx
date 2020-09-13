@@ -36,7 +36,8 @@ function ReadStory(props) {
     return (
         <div className="container col-lg-9 align-content-center">
             <div className="list_story_header fixed-top">
-                <h1 className={'homelink'}><Link to={'/storiesList'} >Read Stories</Link></h1>
+                <h1 className={'homelink logo'}><Link to={'/storiesList'} >Read Stories</Link></h1>
+                <button type="button" className="btn btn-outline-secondary log-out">Log Out</button>
             </div>
             <h2>
                 {story ? story.title : null}
