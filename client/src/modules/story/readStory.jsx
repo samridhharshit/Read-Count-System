@@ -3,13 +3,38 @@ import axios from 'axios'
 import { Link, useParams } from "react-router-dom";
 import { connect } from 'react-redux'
 
+// socket imports
+import socketIOClient from 'socket.io-client'
+const ENDPOINT = "http://localhost:5000"
+const socket = socketIOClient(ENDPOINT)
+
 function ReadStory(props) {
     const { StoryId } = useParams()
     const [loading, setLoading] = useState(true)
     const [story, setStory] = useState(null)
     const [readCount, setReadCount] = useState(0)
+    const [socketId, setSocketId] = useState('')
+    const [liveCount, setLiveCount] = useState(0)
 
     useEffect(() => {
+        // set up socket connection
+        const socket = socketIOClient(ENDPOINT)
+        socket.on('connect', () => {
+            socket.emit('room', StoryId)
+        })
+
+        socket.on('updateCount', async (data) => {
+            console.log(data)
+            if (!data.removedUser) {
+                await setSocketId(data.currentUser)
+            }
+            await setLiveCount(data.clientsCount)
+        })
+
+        socket.on('disconnect', () => {
+            socket.emit('room', StoryId)
+        })
+
         async function getStory() {
             const response = await axios.get(`/api/story/getStory/${props.user.id}/${StoryId}`)
             console.log(response)
@@ -25,6 +50,14 @@ function ReadStory(props) {
         getStory()
     }, [])
 
+    const unmountUser = () => {
+
+        socket.emit('unmountUser', {
+            roomId: StoryId,
+            userIdToRemove: socketId
+        })
+    }
+
     if (loading) {
         return (
             <div className="list_story_header fixed-top">
@@ -36,7 +69,7 @@ function ReadStory(props) {
     return (
         <div className="container col-lg-9 align-content-center">
             <div className="list_story_header fixed-top">
-                <h1 className={'homelink logo'}><Link to={'/storiesList'} >Read Stories</Link></h1>
+                <h1 className={'homelink logo'}><Link onClick={unmountUser} to={'/storiesList'} >Read Stories</Link></h1>
                 <button type="button" className="btn btn-outline-secondary log-out">Log Out</button>
             </div>
             <h2>
@@ -72,7 +105,7 @@ function ReadStory(props) {
                     <path d="M0 12h16v.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5V12z"/>
                 </svg>
             </div>
-            <div className="reading_text">245 Current Reading</div>
+            <div className="reading_text">{liveCount} Current Reading</div>
             <br />
             <br />
             <p>{story ? story.text : null}</p>
