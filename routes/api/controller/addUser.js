@@ -2,6 +2,7 @@ const User = require('../../../database/models/container/User')
 const PasswordCheck = require('../controller/encryptDecryptPassword')
 
 const AddUser = async (userBody) => {
+    console.log(userBody)
     if (!userBody) {
         return {
             success: false,
@@ -11,22 +12,24 @@ const AddUser = async (userBody) => {
 
     // Create a User
     const data = {
-        firstName: userBody.firstName,
-        lastName: userBody.lastName,
+        firstName: userBody.fName,
+        lastName: userBody.lName,
         email: userBody.email,
-        password: PasswordCheck.getHashPassword(userBody.password),
-        username: userBody.firstName + userBody.lastName
+        password: await PasswordCheck.getHashPassword(userBody.password),
+        username: userBody.fName + userBody.lName
     };
 
     // Save Tutorial in the database
     const result = await User.create(data)
+    console.log(result.id)
     if (result) {
-        const msg = {
+        return {
             success: true,
-            data: result
+            data: {
+                id: result.id,
+                name: result.firstName
+            }
         }
-        console.log(result)
-        return msg
     }
 }
 module.exports = AddUser

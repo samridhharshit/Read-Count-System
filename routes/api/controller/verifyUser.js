@@ -15,18 +15,27 @@ const VerifyUser = async (body) => {
             email: body.email
         }
     })
+    // console.log(user.password)
 
-    if (user.length !== 0) {
-        if (await PasswordCheck.compareWithPasswordHash(body.password, user[0].password)) {
+    if (user) {
+        if (await PasswordCheck.compareWithPasswordHash(body.password, user.password)) {
+            const objToReturn = {
+                id: user.id,
+                name: user.firstName
+            }
             return {
                 success: true,
-                data: user[0]
+                data: objToReturn
             }
+        }
+        return {
+            success: false,
+            message: 'Incorrect password, Please enter the correct password...'
         }
     }
     return {
         success: false,
-        msg: 'Invalid Email Id, Please enter the correct email...'
+        message: 'Invalid Email Id, Please enter the correct email...'
     }
 }
 

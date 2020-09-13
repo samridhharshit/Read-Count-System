@@ -7,7 +7,7 @@ const path = require('path')
 const sequelize = require('./database/models')
 
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 5000
 const csrfMiddleware = csrf({ cookie: true })
 
 app.use(bodyParser.urlencoded({ extended: false }))

@@ -21,7 +21,7 @@ function App() {
               <Switch>
                   <Route exact path="/" component={Signup} />
                   <Route exact path="/login" component={Login} />
-                  <Route exact path="/story" component={ReadStory} />
+                  <Route exact path="/story/:StoryId" component={ReadStory} />
                   <Route eaxt path="/storiesList" component={StoriesCollection} />
                   <Redirect to={'/'} />
               </Switch>
