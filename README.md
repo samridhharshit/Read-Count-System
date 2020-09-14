@@ -7,6 +7,19 @@ It is a simple website consisting of namely 4 pages
  - Login page - It takes up user's email and password
  - A page showing the collection of all stories - consists of all the stories
  - A page to display a particular story - consists of the story title, story description, total viewers count and live viewers visiting count
+ # Stack Used
+ 
+ 1. Nodejs as backend framework
+ 2. expressjs as nodejs web app framework
+ 3. body-parser for auto parsing of json/urlencoded data
+ 4. bcrypt for hashing the password
+ 5. Reactjs as frontend library
+ 6. redux for storing state of user
+ 7. socket.io for reading live counts
+ 8. csurf for restricting cross origin triggering
+ 9. mysql as database
+ 10. Sequelize ORM for establishing connection with the database
+ 
  
  # Backend Architecture
  
