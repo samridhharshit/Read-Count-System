@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 // socket imports
 import socketIOClient from 'socket.io-client'
-const ENDPOINT = "https://livereadcount.herokuapp.com/#/"
+const ENDPOINT = "http://localhost:5000"
 const socket = socketIOClient(ENDPOINT)
 
 function ReadStory(props) {
@@ -57,15 +57,9 @@ function ReadStory(props) {
             userIdToRemove: socketId
         })
     }
-
-    const logoutUser = () => {
-        console.log('here')
-        props.logOutUser()
-    }
-
     if (loading) {
         if (Object.keys(props.user).length === 0) {
-            return <Redirect push={true} to={'/login'} />
+            return <Redirect push={true} to={'/'} />
         }
         return (
             <div className="list_story_header fixed-top">
@@ -78,11 +72,7 @@ function ReadStory(props) {
         <div className="container col-lg-9 align-content-center">
             <div className="list_story_header fixed-top">
                 <h1 className={'homelink logo'}><Link onClick={unmountUser} to={'/storiesList'} >Read Stories</Link></h1>
-                <button
-                    onClick={logoutUser}
-                    type="button"
-                    className="btn btn-outline-secondary log-out"
-                >Log Out</button>
+                <button type="button" className="btn btn-outline-secondary log-out">Log Out</button>
             </div>
             <h2>
                 {story ? story.title : null}
@@ -131,10 +121,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        logOutUser: () => {dispatch({ type: 'LOGOUT_USER' })}
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ReadStory)
+export default connect(mapStateToProps)(ReadStory)

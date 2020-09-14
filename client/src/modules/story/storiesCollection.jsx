@@ -17,9 +17,8 @@ function StoriesCollection(props) {
         // console.log(props.user)
     }, [])
 
-
     if (Object.keys(props.user).length === 0) {
-        return <Redirect push={true} to={'/login'} />
+        return <Redirect push={true} to={'/'} />
     }
 
     return (
@@ -27,11 +26,7 @@ function StoriesCollection(props) {
 
             <div className="list_story_header fixed-top">
                 <h1 className="logo">Read Stories</h1>
-                <input
-                    type="button"
-                    onClick={props.logTheUserOut()}
-                    className="btn btn-outline-secondary log-out"
-                >Log Out</input>
+                <button type="button" className="btn btn-outline-secondary log-out">Log Out</button>
             </div>
             <div className="row row-cols-1 row-cols-md-1">
                 {
@@ -73,10 +68,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        logTheUserOut: () => {dispatch({ type: 'LOGOUT_USER' })}
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StoriesCollection)
+export default connect(mapStateToProps)(StoriesCollection)
