@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 // socket imports
 import socketIOClient from 'socket.io-client'
-const ENDPOINT = "http://localhost:5000"
+const ENDPOINT = "https://livereadcount.herokuapp.com/#/"
 const socket = socketIOClient(ENDPOINT)
 
 function ReadStory(props) {
