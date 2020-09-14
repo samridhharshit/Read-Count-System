@@ -75,6 +75,12 @@ const rootReducers = (state = initState, action) => {
         };
         // console.log(state);
     }
+    if (action.type === 'LOGOUT_USER') {
+        console.log(action)
+        return {
+            user: {}
+        }
+    }
     return state;
 };
 

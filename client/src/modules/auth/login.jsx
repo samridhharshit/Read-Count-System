@@ -28,6 +28,10 @@ function Login(props) {
         }
     }
 
+    if (Object.keys(props.user).length === 0) {
+        return <Redirect push={true} to={'/storiesList'} />
+    }
+
     if (isLoggedIn) {
         return <Redirect to={'/storiesList'} />
     }
@@ -58,10 +62,16 @@ function Login(props) {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         provideUserDetails: (userData) => {dispatch({ type: 'MOUNT_USER', userData })}
     }
 }
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
