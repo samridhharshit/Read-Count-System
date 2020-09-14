@@ -6,20 +6,23 @@ const getUserCountsForStory = async (storyId) => {
     //     distinct: 'userId'
     // })
 
-    const rows = await History.aggregate('storyId', 'SUM', {
-        where: { storyId },
-        plain: false,
-        group: ['userId']
-    })
-    if (rows !== null) {
-        return {
-            success: true,
-            data: rows.length
+    try {
+        const rows = await History.aggregate('storyId', 'SUM', {
+            where: { storyId },
+            plain: false,
+            group: ['userId']
+        })
+        if (rows !== null) {
+            return {
+                success: true,
+                data: rows.length
+            }
         }
-    }
-    return {
-        success: false,
-        message: 'Rows Couldn\'t be found...'
+    } catch (e) {
+        return {
+            success: false,
+            message: e
+        }
     }
 }
 

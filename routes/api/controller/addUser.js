@@ -20,15 +20,22 @@ const AddUser = async (userBody) => {
     };
 
     // Save Tutorial in the database
-    const result = await User.create(data)
-    console.log(result.id)
-    if (result) {
-        return {
-            success: true,
-            data: {
-                id: result.id,
-                name: result.firstName
+    try {
+        const result = await User.create(data)
+        console.log(result.id)
+        if (result) {
+            return {
+                success: true,
+                data: {
+                    id: result.id,
+                    name: result.firstName
+                }
             }
+        }
+    }catch (e) {
+        return {
+            success: false,
+            message: e
         }
     }
 }

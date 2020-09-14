@@ -10,33 +10,41 @@ const VerifyUser = async (body) => {
     }
 
 //    verify User
-    const user = await User.findOne({
-        where: {
-            email: body.email
-        }
-    })
-    // console.log(user.password)
+    try {
+        const user = await User.findOne({
+            where: {
+                email: body.email
+            }
+        })
+        // console.log(user.password)
 
-    if (user) {
-        if (await PasswordCheck.compareWithPasswordHash(body.password, user.password)) {
-            const objToReturn = {
-                id: user.id,
-                name: user.firstName
+        if (user) {
+            if (await PasswordCheck.compareWithPasswordHash(body.password, user.password)) {
+                const objToReturn = {
+                    id: user.id,
+                    name: user.firstName
+                }
+                return {
+                    success: true,
+                    data: objToReturn
+                }
             }
             return {
-                success: true,
-                data: objToReturn
+                success: false,
+                message: 'Incorrect password, Please enter the correct password...'
             }
         }
         return {
             success: false,
-            message: 'Incorrect password, Please enter the correct password...'
+            message: 'Invalid Email Id, Please enter the correct email...'
+        }
+    } catch (e) {
+        return {
+            success: false,
+            message: `sql crashed with error message ${e}`
         }
     }
-    return {
-        success: false,
-        message: 'Invalid Email Id, Please enter the correct email...'
-    }
+
 }
 
 module.exports = VerifyUser

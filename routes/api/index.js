@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+
 const db = require('../../database/models/index')
 const users = require('../../database/models/container/User')
 const stories = require('../../database/models/container/story')

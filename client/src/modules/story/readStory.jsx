@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios'
-import { Link, useParams } from "react-router-dom";
+import {Link, Redirect, useParams} from "react-router-dom";
 import { connect } from 'react-redux'
 
 // socket imports
@@ -48,7 +48,7 @@ function ReadStory(props) {
             setLoading(false)
         }
         getStory()
-    }, [])
+    }, [loading])
 
     const unmountUser = () => {
 
@@ -57,8 +57,10 @@ function ReadStory(props) {
             userIdToRemove: socketId
         })
     }
-
     if (loading) {
+        if (Object.keys(props.user).length === 0) {
+            return <Redirect push={true} to={'/'} />
+        }
         return (
             <div className="list_story_header fixed-top">
                 <h1 className={'homelink'}>Loading your Story...</h1>

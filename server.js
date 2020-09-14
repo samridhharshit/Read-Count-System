@@ -27,8 +27,6 @@ sequelize.authenticate()
     .then(() => console.log('Database connected...'))
     .catch((e) => console.log('Error: ' + e))
 
-const socketListener = require('./socketRoutes/')
-
 // managing all REST apis
 app.use('/', require('./routes/index'))
 
