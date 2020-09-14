@@ -1,6 +1,6 @@
 # Introduction
 
-Read count system consists of a set of stories that are accessible by multiple users. Its shows count of all the viewers that have visited a story alongside the live viewers that are currently reading the story.
+Read count system consists of a set of stories that are accessible by multiple users. Its shows count of all the viewers that have visited a story alongside the live viewers that are currently reading the story. [visit the website](https://livereadcount.herokuapp.com/)
 
 It is a simple website consisting of namely 4 pages
  - Signup Page - It takes up user's first name, last name, email and password 
