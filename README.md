@@ -1,6 +1,7 @@
 # Introduction
 
-### Due to paid service by phpmyadmin(clound db provider for the project), the deployed link for the application will run from this point. Kindly add your own db configuration in the `/database/config.js file`. Thank you.
+#### Update1 -  Due to paid service by phpmyadmin(clound db provider for the project), the deployed link for the application will run from this point. Kindly add your own db configuration in the `/database/config.js file`. Thank you.
+#### update2 - website is running live again. It will be active till Sep 26, 2020
 
 Read count system consists of a set of stories that are accessible by multiple users. Its shows count of all the viewers that have visited a story alongside the live viewers that are currently reading the story. [visit the website](https://livereadcount.herokuapp.com/)
 
